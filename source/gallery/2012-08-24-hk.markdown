@@ -1,0 +1,11 @@
+---
+layout: page
+title: "Hong Kong 2 Days"
+date: 2012-08-27 13:53
+comments: true
+sharing: true
+footer: true
+---
+
+{% img left http://p.kaixin001.com/privacy/photo/13/23/714456_882132371_rotate.jpg %}
+{% img left http://p.kaixin001.com/privacy/photo/13/26/714456_882132694_rotate.jpg %}
