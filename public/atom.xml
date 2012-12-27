@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Aztack's Blog]]></title>
+  <link href="http://aztack.github.com/atom.xml" rel="self"/>
+  <link href="http://aztack.github.com/"/>
+  <updated>2012-12-27T10:44:48+08:00</updated>
+  <id>http://aztack.github.com/</id>
+  <author>
+    <name><![CDATA[aztack]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Detect Mouseout in IE678]]></title>
+    <link href="http://aztack.github.com/blog/2012/12/12/detect-mouseout-in-ie678/"/>
+    <updated>2012-12-12T16:49:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/12/12/detect-mouseout-in-ie678</id>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">mouseoutEventName</span> <span class="o">=</span> <span class="s1">&#39;mouseout.namespace&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">unbind</span><span class="p">(</span><span class="nx">mouseoutEventName</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">mouseoutEventName</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">from</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">relatedTarget</span> <span class="o">||</span> <span class="nx">e</span><span class="p">.</span><span class="nx">toElement</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">from</span> <span class="o">||</span> <span class="nx">from</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">===</span> <span class="s2">&quot;HTML&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">//mouse move out window(document)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[srcElement-is-undefined-in-firefox11]]></title>
+    <link href="http://aztack.github.com/blog/2012/09/10/srcelement-is-undefined-in-firefox11/"/>
+    <updated>2012-09-10T14:08:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/09/10/srcelement-is-undefined-in-firefox11</id>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">element</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;mousedown&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span><span class='line'>  <span class="c1">//srcElement is undefined in firefox11 use target in original event instead</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">srcElement</span> <span class="o">||</span> <span class="nx">e</span><span class="p">.</span><span class="nx">originalEvent</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress failed to read_yaml]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/28/octopress-failed-to-read-yaml/"/>
+    <updated>2012-08-28T16:06:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/28/octopress-failed-to-read-yaml</id>
+    <content type="html"><![CDATA[<p>Octopress failed to read_yaml if your markdown file is GBK encoding.
+edit <strong>Ruby1.9.3\lib\ruby\gems\1.9.1\gems\jekyll-0.11.2\lib\jekyll\convertible.rb</strong>
+as follow</p>
+
+<figure class='code'><figcaption><span>convertible.rb line#29</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">read_yaml</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>  <span class="nb">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="nb">name</span><span class="p">))</span><span class="o">.</span><span class="n">force_encoding</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=~</span> <span class="sr">/^(---\s*\n.*?\n?)^(---\s*$\n?)/m</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="vg">$POSTMATCH</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="vg">$1</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;YAML Exception reading </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nb">self</span><span class="o">.</span><span class="n">data</span> <span class="o">||=</span> <span class="p">{}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>force_encoding will do the trick.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[e.keyCode when ctrl pressed]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/28/keycode-when-ctrl-pressed/"/>
+    <updated>2012-08-28T15:53:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/28/keycode-when-ctrl-pressed</id>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span>e.keyCode may be 13 or 10</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">textarea</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="cm">/**</span>
+</span><span class='line'><span class="cm">    * Some browsers will send keyCode == 10 instead of keyCode == 13 when using the ctrl modifier key</span>
+</span><span class='line'><span class="cm">    * (some browsers will send it even when you aren&#39;t using the ctrl modifier key).</span>
+</span><span class='line'><span class="cm">    */</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">ctrlKey</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">===</span> <span class="mi">13</span> <span class="o">||</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">===</span> <span class="mi">10</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">//do something</span>
+</span><span class='line'>        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Setup Octopress on Windows 7]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/22/setup-octopress-on-windows/"/>
+    <updated>2012-08-22T16:42:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/22/setup-octopress-on-windows</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://octopress.org/images/logo.png"></p>
+
+<p> <em>Windows 7 + ruby 1.9.3p125 (2012-02-16)</em>
+先安装 ruby 1.9.3和DevKit
+然后git clone octopress
+octopress目录下有个rakefile
+rake -T查看可用的task
+rake new_post[&#8220;post title&#8221;]
+在/source/_post下生成一个markdown文件，
+编辑markedown文件为blog内容</p>
+
+<p>rake generate将在_deploy目录下生成静态文件
+rake deploy将生成的静态文件push到github上</p>
+
+<p>其中在generate的时候可能由于python的版本问题出错：</p>
+
+<p>当增加如下code block 后，</p>
+
+<figure class='code'><figcaption><span>code block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="sb">```language-name</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用octopress的rake generate生成静态文件时，提示无法打开:</p>
+
+<figure class='code'><figcaption><span>error</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Could not open library ...python26.dll
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原因是python的版本不对。
+下载了一个activepython2.7.2.5后，设置好环境变量就OK了
+octopress的语法高亮是gem rubypython调用python的pygments做得</p>
+
+<h2>参考：</h2>
+
+<ul>
+<li><a href="http://www.cnblogs.com/rubylouvre/archive/2012/06/10/2543744.html">在github上用octopress搭建博客过程纪要</a></li>
+<li><a href="http://ihacklog.com/post/how-to-setup-an-octopress-blog-on-github.html">用Octopress搭建基于github的博客</a></li>
+<li><a href="http://clark1231.iteye.com/blog/1553939">Octopress设置与增加微博的侧边栏</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Define method in JavaScript and Ruby]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/16/Define-method-in-JavaScript-and-Ruby/"/>
+    <updated>2012-08-16T14:55:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/16/Define-method-in-JavaScript-and-Ruby</id>
+    <content type="html"><![CDATA[<p>In javascript, function can be attached onto any <em>object</em>;
+<em>object</em> attributes can be anything,when it is a function, it become a method of that <em>object</em>.</p>
+
+<p>If <em>object</em> is prototype of a function, the attached function becomes
+instance method of that function(`class&#8217;).</p>
+
+<p>In ruby, all methods are reside in instance of <strong>Class</strong>:</p>
+
+<ul>
+<li>intance methods are in object.class;</li>
+<li>singleton methods are in object.eigenclass. in code <em>class &lt;&lt; object</em>.in another word, eigenclass;</li>
+<li>class methods are in eigenclass of object.class, in code <em>object.class.eigenclass</em></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Object#eigenclass</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Object</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">eigenclass</span>
+</span><span class='line'>      <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span><span class="p">;</span><span class="nb">self</span><span class="p">;</span><span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Define <strong>singleton</strong> method</h2>
+
+<figure class='code'><figcaption><span>define singleton method in javascript</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'><span class="nx">obj</span><span class="p">.</span><span class="nx">greeting</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>define singleton method in ruby</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">obj</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'><span class="k">def</span> <span class="nc">obj</span><span class="o">.</span><span class="nf">greeting1</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s1">&#39;hi&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="n">obj</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">greeting2</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s1">&#39;hello&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Define <strong>instance</strong> method</h2>
+
+<figure class='code'><figcaption><span>define instance method in javascript</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Clazz</span><span class="p">(){}</span>
+</span><span class='line'><span class="nx">Clazz</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">instanceMethod</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>define instance method in ruby</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Clazz</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">instanceMethod</span><span class="p">;</span><span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Define <strong>class</strong> method</h2>
+
+<figure class='code'><figcaption><span>define class method in javascript</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Clazz</span><span class="p">(){}</span>
+</span><span class='line'><span class="nx">Clazz</span><span class="p">.</span><span class="nx">classMethod</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>define class method in ruby</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Clazz</span>
+</span><span class='line'>  <span class="n">define</span> <span class="nb">self</span><span class="o">.</span><span class="n">classMethod1</span><span class="p">;</span><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">classMethod2</span><span class="p">;</span><span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Define attribute</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Klass</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;klass&#39;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">Klass</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">attr</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">k</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Klass</span><span class="p">();</span>
+</span><span class='line'><span class="nx">k</span><span class="p">.</span><span class="nx">attr</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+</span><span class='line'><span class="nx">k</span><span class="p">.</span><span class="nx">attr</span> <span class="err">#</span><span class="o">=&gt;</span> <span class="mi">123</span>
+</span><span class='line'><span class="nx">k</span><span class="p">.</span><span class="nx">name</span> <span class="err">#</span><span class="o">=&gt;</span> <span class="s1">&#39;klass&#39;</span>
+</span><span class='line'><span class="p">(</span><span class="k">new</span> <span class="nx">Klass</span><span class="p">()).</span><span class="nx">attr</span> <span class="err">#</span><span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'><span class="p">(</span><span class="k">new</span> <span class="nx">Klass</span><span class="p">()).</span><span class="nx">name</span> <span class="err">#</span><span class="o">=&gt;</span> <span class="s1">&#39;klass&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Klass</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">k</span> <span class="o">=</span> <span class="no">Klass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">k</span><span class="o">.</span><span class="n">instance_variable_get</span><span class="p">(:</span><span class="vi">@attr</span><span class="p">)</span> <span class="c1">#=&gt; nil</span>
+</span><span class='line'><span class="n">k</span><span class="o">.</span><span class="n">instance_variable_set</span><span class="p">(:</span><span class="vi">@attr</span><span class="p">,</span><span class="mi">123</span><span class="p">)</span> <span class="c1">#=&gt; 123</span>
+</span><span class='line'><span class="n">k</span><span class="o">.</span><span class="n">instance_variable_get</span><span class="p">(:</span><span class="vi">@attr</span><span class="p">)</span> <span class="c1">#=&gt; 123</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">k</span><span class="o">.</span><span class="n">attr</span> <span class="c1">#=&gt; undefined method `attr&#39;</span>
+</span><span class='line'><span class="k">def</span> <span class="nc">k</span><span class="o">.</span><span class="nf">attr</span><span class="p">;</span><span class="vi">@attr</span><span class="p">;</span><span class="k">end</span>
+</span><span class='line'><span class="n">k</span><span class="o">.</span><span class="n">attr</span> <span class="c1">#=&gt; 123</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Klass</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">attr</span> <span class="c1">#=&gt; undefined method `attr&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+</feed>

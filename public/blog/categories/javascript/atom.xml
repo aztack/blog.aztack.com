@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript | Aztack's Blog]]></title>
+  <link href="http://aztack.github.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://aztack.github.com/"/>
+  <updated>2012-12-27T10:44:48+08:00</updated>
+  <id>http://aztack.github.com/</id>
+  <author>
+    <name><![CDATA[aztack]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[srcElement-is-undefined-in-firefox11]]></title>
+    <link href="http://aztack.github.com/blog/2012/09/10/srcelement-is-undefined-in-firefox11/"/>
+    <updated>2012-09-10T14:08:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/09/10/srcelement-is-undefined-in-firefox11</id>
+    <content type="html"><![CDATA[<p>```javascript
+element.bind('mousedown',function(e){</p>
+
+<pre><code>//srcElement is undefined in firefox11 use target in original event instead
+var target = e.srcElement || e.originalEvent.target;
+</code></pre>
+
+<p>});
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[e.keyCode when ctrl pressed]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/28/keycode-when-ctrl-pressed/"/>
+    <updated>2012-08-28T15:53:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/28/keycode-when-ctrl-pressed</id>
+    <content type="html"><![CDATA[<p>``` javascript e.keyCode may be 13 or 10
+textarea.bind('keypress', function (e) {</p>
+
+<pre><code>/**
+* Some browsers will send keyCode == 10 instead of keyCode == 13 when using the ctrl modifier key
+* (some browsers will send it even when you aren't using the ctrl modifier key).
+*/
+if (e.ctrlKey &amp;&amp; (e.keyCode === 13 || e.keyCode === 10)) {
+    //do something
+    e.preventDefault();
+}
+</code></pre>
+
+<p>});
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Define method in JavaScript and Ruby]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/16/Define-method-in-JavaScript-and-Ruby/"/>
+    <updated>2012-08-16T14:55:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/16/Define-method-in-JavaScript-and-Ruby</id>
+    <content type="html"><![CDATA[<p>In javascript, function can be attached onto any <em>object</em>;
+<em>object</em> attributes can be anything,when it is a function, it become a method of that <em>object</em>.</p>
+
+<p>If <em>object</em> is prototype of a function, the attached function becomes
+instance method of that function(`class').</p>
+
+<p>In ruby, all methods are reside in instance of <strong>Class</strong>:</p>
+
+<ul>
+<li>intance methods are in object.class;</li>
+<li>singleton methods are in object.eigenclass. in code <em>class &lt;&lt; object</em>.in another word, eigenclass;</li>
+<li>class methods are in eigenclass of object.class, in code <em>object.class.eigenclass</em></li>
+</ul>
+
+
+<p>``` ruby Object#eigenclass</p>
+
+<pre><code>class Object
+    def eigenclass
+        class &lt;&lt; self;self;end
+    end
+end
+</code></pre>
+
+<p>```</p>
+
+<h2>Define <strong>singleton</strong> method</h2>
+
+<p>``` javascript define singleton method in javascript</p>
+
+<pre><code>var obj = {};
+obj.greeting = function(){
+    console.log('hi');
+};
+</code></pre>
+
+<p>```</p>
+
+<p>``` ruby define singleton method in ruby</p>
+
+<pre><code>obj = {}
+def obj.greeting1
+    puts 'hi'
+end
+
+class &lt;&lt; obj
+    def greeting2
+        puts 'hello'
+    end
+end
+</code></pre>
+
+<p>```</p>
+
+<h2>Define <strong>instance</strong> method</h2>
+
+<p>``` javascript define instance method in javascript</p>
+
+<pre><code>function Clazz(){}
+Clazz.prototype.instanceMethod = function(){};
+</code></pre>
+
+<p>```</p>
+
+<p>``` ruby define instance method in ruby</p>
+
+<pre><code>class Clazz
+    def instanceMethod;end
+end
+</code></pre>
+
+<p>```</p>
+
+<h2>Define <strong>class</strong> method</h2>
+
+<p>``` javascript define class method in javascript</p>
+
+<pre><code>function Clazz(){}
+Clazz.classMethod = function(){};
+</code></pre>
+
+<p>```</p>
+
+<p>``` ruby define class method in ruby</p>
+
+<pre><code>class Clazz
+    define self.classMethod1;end
+
+    class &lt;&lt; self
+        def classMethod2;end
+    end
+end
+</code></pre>
+
+<p>```</p>
+
+<h2>Define attribute</h2>
+
+<p>``` javascript</p>
+
+<pre><code>function Klass(){
+    this.name = 'klass'
+}
+Klass.prototype.attr = 1;
+
+k = new Klass();
+k.attr = 123;
+k.attr #=&gt; 123
+k.name #=&gt; 'klass'
+(new Klass()).attr #=&gt; 1
+(new Klass()).name #=&gt; 'klass'
+</code></pre>
+
+<p>```</p>
+
+<p>``` ruby</p>
+
+<pre><code>Klass = Class.new
+k = Klass.new
+
+k.instance_variable_get(:@attr) #=&gt; nil
+k.instance_variable_set(:@attr,123) #=&gt; 123
+k.instance_variable_get(:@attr) #=&gt; 123
+
+k.attr #=&gt; undefined method `attr'
+def k.attr;@attr;end
+k.attr #=&gt; 123
+
+Klass.new.attr #=&gt; undefined method `attr'
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

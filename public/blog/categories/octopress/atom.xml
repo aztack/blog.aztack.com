@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | Aztack's Blog]]></title>
+  <link href="http://aztack.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://aztack.github.com/"/>
+  <updated>2012-12-27T10:44:48+08:00</updated>
+  <id>http://aztack.github.com/</id>
+  <author>
+    <name><![CDATA[aztack]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress failed to read_yaml]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/28/octopress-failed-to-read-yaml/"/>
+    <updated>2012-08-28T16:06:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/28/octopress-failed-to-read-yaml</id>
+    <content type="html"><![CDATA[<p>Octopress failed to read_yaml if your markdown file is GBK encoding.
+edit <strong>Ruby1.9.3\lib\ruby\gems\1.9.1\gems\jekyll-0.11.2\lib\jekyll\convertible.rb</strong>
+as follow</p>
+
+<p>``` ruby convertible.rb line#29
+def read_yaml(base, name)
+  self.content = File.read(File.join(base, name)).force_encoding('utf-8')</p>
+
+<p>  if self.content =~ /<sup>(---\s<em>\n.</em>?\n?)<sup>(---\s*$\n?)/m</sup></sup></p>
+
+<pre><code>self.content = $POSTMATCH
+
+begin
+  self.data = YAML.load($1)
+rescue =&gt; e
+  puts "YAML Exception reading #{name}: #{e.message}"
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  self.data ||= {}
+end
+```</p>
+
+<p>force_encoding will do the trick.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Setup Octopress on Windows 7]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/22/setup-octopress-on-windows/"/>
+    <updated>2012-08-22T16:42:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/22/setup-octopress-on-windows</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://octopress.org/images/logo.png"></p>
+
+<p> <em>Windows 7 + ruby 1.9.3p125 (2012-02-16)</em>
+先安装 ruby 1.9.3和DevKit
+然后git clone octopress
+octopress目录下有个rakefile
+rake -T查看可用的task
+rake new_post["post title"]
+在/source/_post下生成一个markdown文件，
+编辑markedown文件为blog内容</p>
+
+<p>rake generate将在_deploy目录下生成静态文件
+rake deploy将生成的静态文件push到github上</p>
+
+<p>其中在generate的时候可能由于python的版本问题出错：</p>
+
+<p>当增加如下code block 后，
+```ruby code block</p>
+
+<pre><code>```language-name
+</code></pre>
+
+<p><code>
+使用octopress的rake generate生成静态文件时，提示无法打开:
+</code>bash error</p>
+
+<pre><code>Could not open library ...python26.dll
+</code></pre>
+
+<p>```
+原因是python的版本不对。
+下载了一个activepython2.7.2.5后，设置好环境变量就OK了
+octopress的语法高亮是gem rubypython调用python的pygments做得</p>
+
+<h2>参考：</h2>
+
+<ul>
+<li><a href="http://www.cnblogs.com/rubylouvre/archive/2012/06/10/2543744.html">在github上用octopress搭建博客过程纪要</a></li>
+<li><a href="http://ihacklog.com/post/how-to-setup-an-octopress-blog-on-github.html">用Octopress搭建基于github的博客</a></li>
+<li><a href="http://clark1231.iteye.com/blog/1553939">Octopress设置与增加微博的侧边栏</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

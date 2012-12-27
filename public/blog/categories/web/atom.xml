@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: web | Aztack's Blog]]></title>
+  <link href="http://aztack.github.com/blog/categories/web/atom.xml" rel="self"/>
+  <link href="http://aztack.github.com/"/>
+  <updated>2012-12-27T10:44:48+08:00</updated>
+  <id>http://aztack.github.com/</id>
+  <author>
+    <name><![CDATA[aztack]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[e.keyCode when ctrl pressed]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/28/keycode-when-ctrl-pressed/"/>
+    <updated>2012-08-28T15:53:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/28/keycode-when-ctrl-pressed</id>
+    <content type="html"><![CDATA[<p>``` javascript e.keyCode may be 13 or 10
+textarea.bind('keypress', function (e) {</p>
+
+<pre><code>/**
+* Some browsers will send keyCode == 10 instead of keyCode == 13 when using the ctrl modifier key
+* (some browsers will send it even when you aren't using the ctrl modifier key).
+*/
+if (e.ctrlKey &amp;&amp; (e.keyCode === 13 || e.keyCode === 10)) {
+    //do something
+    e.preventDefault();
+}
+</code></pre>
+
+<p>});
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

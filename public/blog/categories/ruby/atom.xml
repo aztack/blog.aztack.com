@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby | Aztack's Blog]]></title>
+  <link href="http://aztack.github.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://aztack.github.com/"/>
+  <updated>2012-12-27T10:44:48+08:00</updated>
+  <id>http://aztack.github.com/</id>
+  <author>
+    <name><![CDATA[aztack]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress failed to read_yaml]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/28/octopress-failed-to-read-yaml/"/>
+    <updated>2012-08-28T16:06:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/28/octopress-failed-to-read-yaml</id>
+    <content type="html"><![CDATA[<p>Octopress failed to read_yaml if your markdown file is GBK encoding.
+edit <strong>Ruby1.9.3\lib\ruby\gems\1.9.1\gems\jekyll-0.11.2\lib\jekyll\convertible.rb</strong>
+as follow</p>
+
+<p>``` ruby convertible.rb line#29
+def read_yaml(base, name)
+  self.content = File.read(File.join(base, name)).force_encoding('utf-8')</p>
+
+<p>  if self.content =~ /<sup>(---\s<em>\n.</em>?\n?)<sup>(---\s*$\n?)/m</sup></sup></p>
+
+<pre><code>self.content = $POSTMATCH
+
+begin
+  self.data = YAML.load($1)
+rescue =&gt; e
+  puts "YAML Exception reading #{name}: #{e.message}"
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  self.data ||= {}
+end
+```</p>
+
+<p>force_encoding will do the trick.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Define method in JavaScript and Ruby]]></title>
+    <link href="http://aztack.github.com/blog/2012/08/16/Define-method-in-JavaScript-and-Ruby/"/>
+    <updated>2012-08-16T14:55:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/08/16/Define-method-in-JavaScript-and-Ruby</id>
+    <content type="html"><![CDATA[<p>In javascript, function can be attached onto any <em>object</em>;
+<em>object</em> attributes can be anything,when it is a function, it become a method of that <em>object</em>.</p>
+
+<p>If <em>object</em> is prototype of a function, the attached function becomes
+instance method of that function(`class').</p>
+
+<p>In ruby, all methods are reside in instance of <strong>Class</strong>:</p>
+
+<ul>
+<li>intance methods are in object.class;</li>
+<li>singleton methods are in object.eigenclass. in code <em>class &lt;&lt; object</em>.in another word, eigenclass;</li>
+<li>class methods are in eigenclass of object.class, in code <em>object.class.eigenclass</em></li>
+</ul>
+
+
+<p>``` ruby Object#eigenclass</p>
+
+<pre><code>class Object
+    def eigenclass
+        class &lt;&lt; self;self;end
+    end
+end
+</code></pre>
+
+<p>```</p>
+
+<h2>Define <strong>singleton</strong> method</h2>
+
+<p>``` javascript define singleton method in javascript</p>
+
+<pre><code>var obj = {};
+obj.greeting = function(){
+    console.log('hi');
+};
+</code></pre>
+
+<p>```</p>
+
+<p>``` ruby define singleton method in ruby</p>
+
+<pre><code>obj = {}
+def obj.greeting1
+    puts 'hi'
+end
+
+class &lt;&lt; obj
+    def greeting2
+        puts 'hello'
+    end
+end
+</code></pre>
+
+<p>```</p>
+
+<h2>Define <strong>instance</strong> method</h2>
+
+<p>``` javascript define instance method in javascript</p>
+
+<pre><code>function Clazz(){}
+Clazz.prototype.instanceMethod = function(){};
+</code></pre>
+
+<p>```</p>
+
+<p>``` ruby define instance method in ruby</p>
+
+<pre><code>class Clazz
+    def instanceMethod;end
+end
+</code></pre>
+
+<p>```</p>
+
+<h2>Define <strong>class</strong> method</h2>
+
+<p>``` javascript define class method in javascript</p>
+
+<pre><code>function Clazz(){}
+Clazz.classMethod = function(){};
+</code></pre>
+
+<p>```</p>
+
+<p>``` ruby define class method in ruby</p>
+
+<pre><code>class Clazz
+    define self.classMethod1;end
+
+    class &lt;&lt; self
+        def classMethod2;end
+    end
+end
+</code></pre>
+
+<p>```</p>
+
+<h2>Define attribute</h2>
+
+<p>``` javascript</p>
+
+<pre><code>function Klass(){
+    this.name = 'klass'
+}
+Klass.prototype.attr = 1;
+
+k = new Klass();
+k.attr = 123;
+k.attr #=&gt; 123
+k.name #=&gt; 'klass'
+(new Klass()).attr #=&gt; 1
+(new Klass()).name #=&gt; 'klass'
+</code></pre>
+
+<p>```</p>
+
+<p>``` ruby</p>
+
+<pre><code>Klass = Class.new
+k = Klass.new
+
+k.instance_variable_get(:@attr) #=&gt; nil
+k.instance_variable_set(:@attr,123) #=&gt; 123
+k.instance_variable_get(:@attr) #=&gt; 123
+
+k.attr #=&gt; undefined method `attr'
+def k.attr;@attr;end
+k.attr #=&gt; 123
+
+Klass.new.attr #=&gt; undefined method `attr'
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

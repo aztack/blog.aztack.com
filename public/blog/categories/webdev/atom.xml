@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: webdev | Aztack's Blog]]></title>
+  <link href="http://aztack.github.com/blog/categories/webdev/atom.xml" rel="self"/>
+  <link href="http://aztack.github.com/"/>
+  <updated>2012-12-27T10:44:48+08:00</updated>
+  <id>http://aztack.github.com/</id>
+  <author>
+    <name><![CDATA[aztack]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[srcElement-is-undefined-in-firefox11]]></title>
+    <link href="http://aztack.github.com/blog/2012/09/10/srcelement-is-undefined-in-firefox11/"/>
+    <updated>2012-09-10T14:08:00+08:00</updated>
+    <id>http://aztack.github.com/blog/2012/09/10/srcelement-is-undefined-in-firefox11</id>
+    <content type="html"><![CDATA[<p>```javascript
+element.bind('mousedown',function(e){</p>
+
+<pre><code>//srcElement is undefined in firefox11 use target in original event instead
+var target = e.srcElement || e.originalEvent.target;
+</code></pre>
+
+<p>});
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
